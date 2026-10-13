@@ -1,0 +1,355 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<title>Для самой любимой мамы</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Lora:ital,wght@0,400;0,500;1,400&family=Marck+Script&display=swap" rel="stylesheet">
+<style>
+  :root {
+    --bg: #FFF3F5;
+    --bg2: #FFE3E9;
+    --ink: #3A1740;
+    --muted: #7A5280;
+    --rose: #D9446F;
+    --peach: #F28F5F;
+    --leaf: #4E9468;
+    --line: rgba(58, 23, 64, .16);
+    --script: "Marck Script", "Segoe Script", "Brush Script MT", cursive;
+    --serif: "Lora", Georgia, "Times New Roman", serif;
+    box-sizing: border-box;
+    padding-top: env(safe-area-inset-top, 0px);
+    padding-bottom: env(safe-area-inset-bottom, 0px);
+  }
+  @media (prefers-color-scheme: dark) {
+    :root:not([data-theme="light"]) {
+      --bg: #24102B;
+      --bg2: #35183E;
+      --ink: #FFEAEF;
+      --muted: #D9B8C6;
+      --rose: #F58BA8;
+      --peach: #FFB38A;
+      --leaf: #6FAE86;
+      --line: rgba(255, 234, 239, .2);
+    }
+  }
+  :root[data-theme="dark"] {
+    --bg: #24102B;
+    --bg2: #35183E;
+    --ink: #FFEAEF;
+    --muted: #D9B8C6;
+    --rose: #F58BA8;
+    --peach: #FFB38A;
+    --leaf: #6FAE86;
+    --line: rgba(255, 234, 239, .2);
+  }
+  html { scroll-padding-top: env(safe-area-inset-top, 0px); }
+  *, *::before, *::after { box-sizing: inherit; }
+  body {
+    margin: 0;
+    background: var(--bg);
+    color: var(--ink);
+    font-family: var(--serif);
+    font-size: 1.1rem;
+    line-height: 1.75;
+    -webkit-font-smoothing: antialiased;
+  }
+  main { overflow-x: hidden; }
+
+  .hero {
+    padding: 56px 20px 48px;
+    text-align: center;
+    background: radial-gradient(120% 70% at 50% 100%, var(--bg2), transparent 70%);
+  }
+  .hero h1 {
+    margin: 0 auto;
+    max-width: 12em;
+    font-family: var(--script);
+    font-weight: 400;
+    font-size: clamp(2.8rem, 12vw, 5.6rem);
+    line-height: 1.05;
+    color: var(--rose);
+  }
+  .hero p.sub {
+    margin: 18px auto 0;
+    max-width: 24em;
+    color: var(--muted);
+  }
+
+  .bouquet { width: min(86vw, 400px); margin: 28px auto 0; display: block; overflow: visible; }
+  .stem { fill: none; stroke: var(--leaf); stroke-width: 4; stroke-linecap: round;
+          stroke-dasharray: 1; stroke-dashoffset: 1; }
+  .leaf { fill: var(--leaf); }
+  .grow { transform-box: fill-box; transform-origin: center; transform: scale(0); }
+  .bloomed .stem { stroke-dashoffset: 0; transition: stroke-dashoffset 900ms ease-out; transition-delay: var(--d, 0ms); }
+  .bloomed .grow { transform: scale(1); transition: transform 1000ms cubic-bezier(.2, 1.35, .4, 1); transition-delay: var(--d, 0ms); }
+  .wrap-paper { fill: var(--rose); }
+  .wrap-fold { fill: var(--peach); }
+  .bow { fill: var(--peach); }
+
+  .btn {
+    margin-top: 22px;
+    min-height: 48px;
+    padding: 12px 28px;
+    border: 0;
+    border-radius: 999px;
+    background: var(--rose);
+    color: #fff;
+    font: 500 1.05rem var(--serif);
+    cursor: pointer;
+  }
+  .btn:hover { filter: brightness(1.06); }
+  .gift-note {
+    margin-top: 22px;
+    font-family: var(--script);
+    font-size: 2rem;
+    color: var(--peach);
+  }
+  [hidden] { display: none !important; }
+
+  section.block { padding: 40px 20px; }
+  .letter { max-width: 34em; margin: 0 auto; padding-left: 22px; border-left: 3px solid var(--rose); }
+  .letter p { margin: 0 0 1.1em; }
+  .letter .hello { font-family: var(--script); font-size: 2.2rem; line-height: 1.2; color: var(--rose); }
+  .signature { font-family: var(--script); font-size: 2.1rem; line-height: 1.2; color: var(--rose); margin-top: .4em; }
+
+  .thanks { max-width: 34em; margin: 0 auto; }
+  .thanks h2 { font-family: var(--script); font-weight: 400; font-size: clamp(2.1rem, 8vw, 3rem); margin: 0 0 14px; color: var(--rose); }
+  .thanks ul { list-style: none; margin: 0; padding: 0; }
+  .thanks li { display: flex; gap: 14px; align-items: flex-start; padding: 14px 0; border-top: 1px solid var(--line); }
+  .thanks li:last-child { border-bottom: 1px solid var(--line); }
+  .thanks svg { flex: none; width: 20px; height: 20px; margin-top: 6px; fill: var(--rose); }
+
+  .finale { text-align: center; padding: 48px 20px 72px; }
+  .finale .love { font-family: var(--script); font-size: clamp(2.6rem, 11vw, 4.6rem); line-height: 1.1; margin: 0; color: var(--rose); }
+  .heart-btn { position: relative; margin: 18px auto 0; width: 96px; height: 96px; border: 0; background: none; cursor: pointer; padding: 0; }
+  .heart-btn svg { width: 100%; height: 100%; fill: var(--rose); transition: transform 160ms ease; }
+  .heart-btn:active svg { transform: scale(1.18); }
+  .hint { color: var(--muted); font-size: .95rem; margin-top: 4px; }
+
+  :focus-visible { outline: 3px solid var(--peach); outline-offset: 4px; }
+
+  .petals { position: fixed; inset: 0; overflow: hidden; pointer-events: none; z-index: 5; }
+  .petal {
+    position: absolute; top: 0; border-radius: 80% 0 80% 0; opacity: .9;
+    transform: translate(0, -12vh) rotate(0deg);
+    animation: fall linear forwards;
+  }
+  @keyframes fall { to { transform: translate(var(--dx), 112vh) rotate(560deg); } }
+
+  .float-heart {
+    position: absolute; left: 50%; top: 20%; font-size: 1.6rem; color: var(--rose);
+    pointer-events: none; animation: rise 1600ms ease-out forwards;
+  }
+  @keyframes rise {
+    from { transform: translate(-50%, 0) scale(.6); opacity: 1; }
+    to   { transform: translate(calc(-50% + var(--dx)), -150px) scale(1.2); opacity: 0; }
+  }
+
+  @media (prefers-reduced-motion: reduce) {
+    .bloomed .stem, .bloomed .grow { transition: none; }
+    .petals, .float-heart { display: none; }
+  }
+</style>
+</head>
+<body>
+<main>
+
+  <header class="hero">
+    <h1>Мамочка, с Днём матери!</h1>
+    <p class="sub">Для тебя — маленький букет и несколько тёплых слов от самого сердца.</p>
+
+    <svg id="bouquet" class="bouquet" viewBox="0 0 400 440" role="img" aria-label="Букет из пионов и роз"></svg>
+
+    <button id="open" class="btn" type="button">Нажми — это тебе</button>
+    <div id="gift" class="gift-note" hidden>Это тебе, мамочка</div>
+  </header>
+
+  <section class="block">
+    <div class="letter">
+      <p class="hello">Мамочка, родная!</p>
+      <p>Сегодня твой день, и мне хочется сказать то, что обычно теряется в суете будней: спасибо тебе.</p>
+      <p>За то, что ты рядом — даже когда нас разделяют километры. За руки, которые умеют согреть без единого слова. За то, что ты чувствуешь, что мне нужно, раньше, чем я успеваю попросить.</p>
+      <p>Ты научила меня доброте, терпению и тому, что дом — это не стены, а человек, к которому всегда хочется вернуться. Для меня этим человеком всегда была ты.</p>
+      <p>Желаю тебе крепкого здоровья, лёгкого сердца, тёплых дней и времени только для себя. Пусть всё хорошее, что ты отдаёшь другим, возвращается к тебе вдвое.</p>
+      <p>Я очень тебя люблю.</p>
+      <div class="signature">Обнимаю крепко-крепко</div>
+    </div>
+  </section>
+
+  <section class="block">
+    <div class="thanks">
+      <h2>Спасибо тебе за…</h2>
+      <ul id="thanks-list"></ul>
+    </div>
+  </section>
+
+  <section class="finale">
+    <p class="love">Люблю тебя, мама</p>
+    <button id="heart" class="heart-btn" type="button" aria-label="Отправить сердечки">
+      <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M12 21s-7.5-4.6-9.6-9.4C.9 8.1 2.9 4.5 6.4 4.5c2.1 0 3.7 1.1 5.6 3.2 1.9-2.1 3.5-3.2 5.6-3.2 3.5 0 5.5 3.6 4 7.1C19.5 16.4 12 21 12 21z"/></svg>
+    </button>
+    <div class="hint">Нажми на сердце</div>
+  </section>
+
+</main>
+<div id="petals" class="petals" aria-hidden="true"></div>
+
+<script>
+(function () {
+  var NS = "http://www.w3.org/2000/svg";
+  var svg = document.getElementById("bouquet");
+  var reduce = window.matchMedia("(prefers-reduced-motion: reduce)").matches;
+
+  function el(name, attrs, parent) {
+    var n = document.createElementNS(NS, name);
+    for (var k in attrs) n.setAttribute(k, attrs[k]);
+    if (parent) parent.appendChild(n);
+    return n;
+  }
+
+  // --- stems ---
+  var base = { x: 200, y: 385 };
+  var flowers = [
+    { x: 200, y: 105, r: 54, c: "#F58BA8", i: "#FFD1DC", d: 700 },
+    { x: 122, y: 168, r: 44, c: "#FFB38A", i: "#FFE0CC", d: 950 },
+    { x: 280, y: 162, r: 46, c: "#F06A93", i: "#FFB3C8", d: 1100 },
+    { x: 76,  y: 262, r: 36, c: "#FFF0E8", i: "#FFD9E0", d: 1300 },
+    { x: 326, y: 258, r: 38, c: "#FFC27A", i: "#FFE5BF", d: 1450 },
+    { x: 160, y: 238, r: 40, c: "#E85C8A", i: "#FF9DB9", d: 1200 },
+    { x: 242, y: 252, r: 38, c: "#FFF0E8", i: "#FFCFD8", d: 1550 }
+  ];
+
+  var leaves = [
+    { x: 104, y: 318, rot: -55, rx: 13, ry: 34, d: 500 },
+    { x: 298, y: 322, rot: 55,  rx: 13, ry: 34, d: 650 },
+    { x: 150, y: 312, rot: -25, rx: 12, ry: 32, d: 800 },
+    { x: 252, y: 316, rot: 25,  rx: 12, ry: 32, d: 900 },
+    { x: 200, y: 300, rot: 0,   rx: 12, ry: 36, d: 1000 }
+  ];
+
+  var stemLayer = el("g", {}, svg);
+  var leafLayer = el("g", {}, svg);
+  var flowerLayer = el("g", {}, svg);
+  var wrapLayer = el("g", {}, svg);
+
+  flowers.forEach(function (f) {
+    var mx = (base.x + f.x) / 2 + (f.x < base.x ? -10 : 10);
+    var my = (base.y + f.y) / 2 + 20;
+    var p = el("path", {
+      d: "M" + base.x + " " + base.y + " Q" + mx + " " + my + " " + f.x + " " + f.y,
+      "class": "stem", pathLength: 1
+    }, stemLayer);
+    p.style.setProperty("--d", (f.d - 600) + "ms");
+  });
+
+  leaves.forEach(function (l) {
+    var g = el("g", { transform: "translate(" + l.x + " " + l.y + ") rotate(" + l.rot + ")" }, leafLayer);
+    var e = el("ellipse", { cx: 0, cy: 0, rx: l.rx, ry: l.ry, "class": "leaf grow" }, g);
+    e.style.setProperty("--d", l.d + "ms");
+  });
+
+  flowers.forEach(function (f) {
+    var g = el("g", { transform: "translate(" + f.x + " " + f.y + ")" }, flowerLayer);
+    var inner = el("g", { "class": "grow" }, g);
+    inner.style.setProperty("--d", f.d + "ms");
+    var n = 8, k;
+    for (k = 0; k < n; k++) {
+      el("ellipse", {
+        cx: 0, cy: -f.r * 0.55, rx: f.r * 0.4, ry: f.r * 0.62,
+        fill: f.c, stroke: "rgba(90,20,60,.18)", "stroke-width": 1,
+        transform: "rotate(" + (k * 360 / n) + ")"
+      }, inner);
+    }
+    for (k = 0; k < 6; k++) {
+      el("ellipse", {
+        cx: 0, cy: -f.r * 0.34, rx: f.r * 0.27, ry: f.r * 0.4,
+        fill: f.i, opacity: 0.95,
+        transform: "rotate(" + (k * 60 + 30) + ")"
+      }, inner);
+    }
+    el("circle", { r: f.r * 0.2, fill: "#FFC93C" }, inner);
+    el("circle", { r: f.r * 0.1, fill: "#F2A516" }, inner);
+  });
+
+  // wrapping paper and bow (always visible)
+  el("path", { d: "M128 345 L272 345 L214 424 Q200 432 186 424 Z", "class": "wrap-paper" }, wrapLayer);
+  el("path", { d: "M128 345 L200 372 L272 345 L262 360 L200 392 L138 360 Z", "class": "wrap-fold" }, wrapLayer);
+  var bow = el("g", { transform: "translate(200 372)" }, wrapLayer);
+  el("ellipse", { cx: -17, cy: 0, rx: 17, ry: 9, "class": "bow", transform: "rotate(-18 -17 0)" }, bow);
+  el("ellipse", { cx: 17, cy: 0, rx: 17, ry: 9, "class": "bow", transform: "rotate(18 17 0)" }, bow);
+  el("circle", { r: 6, fill: "#fff", opacity: 0.85 }, bow);
+
+  // --- thanks list ---
+  var thanks = [
+    "тёплые руки и объятия, рядом с которыми всегда спокойно",
+    "заботу, которую ты проявляешь не напоказ, а каждый день",
+    "вкус домашней еды и чувство, что я дома",
+    "веру в меня даже тогда, когда я сам в себя не верю",
+    "мудрые советы, которые приходят точно вовремя",
+    "твой смех, от которого светлее в любой день",
+    "то, что ты просто есть"
+  ];
+  var list = document.getElementById("thanks-list");
+  thanks.forEach(function (t) {
+    var li = document.createElement("li");
+    li.innerHTML = '<svg viewBox="0 0 24 24" aria-hidden="true"><path d="M12 21s-7.5-4.6-9.6-9.4C.9 8.1 2.9 4.5 6.4 4.5c2.1 0 3.7 1.1 5.6 3.2 1.9-2.1 3.5-3.2 5.6-3.2 3.5 0 5.5 3.6 4 7.1C19.5 16.4 12 21 12 21z"/></svg>';
+    var s = document.createElement("span");
+    s.textContent = t;
+    li.appendChild(s);
+    list.appendChild(li);
+  });
+
+  // --- bloom ---
+  var openBtn = document.getElementById("open");
+  var gift = document.getElementById("gift");
+  var petalBox = document.getElementById("petals");
+
+  function rainPetals() {
+    if (reduce) return;
+    var colors = ["#F58BA8", "#FFB38A", "#FFD1DC", "#F06A93", "#FFF0E8"];
+    for (var i = 0; i < 30; i++) {
+      var p = document.createElement("span");
+      var size = 10 + Math.random() * 10;
+      p.className = "petal";
+      p.style.width = size + "px";
+      p.style.height = size * 1.3 + "px";
+      p.style.left = Math.random() * 100 + "%";
+      p.style.background = colors[Math.floor(Math.random() * colors.length)];
+      p.style.animationDuration = 5 + Math.random() * 4 + "s";
+      p.style.animationDelay = Math.random() * 2 + "s";
+      p.style.setProperty("--dx", (Math.random() * 160 - 80) + "px");
+      petalBox.appendChild(p);
+    }
+    setTimeout(function () { petalBox.innerHTML = ""; }, 12000);
+  }
+
+  function bloom() {
+    svg.classList.add("bloomed");
+    openBtn.hidden = true;
+    gift.hidden = false;
+    rainPetals();
+  }
+  openBtn.addEventListener("click", bloom);
+  if (reduce) { /* show the finished bouquet right away */ svg.classList.add("bloomed"); }
+
+  // --- hearts ---
+  var heartBtn = document.getElementById("heart");
+  heartBtn.addEventListener("click", function () {
+    if (reduce) return;
+    for (var i = 0; i < 5; i++) {
+      var h = document.createElement("span");
+      h.className = "float-heart";
+      h.textContent = "\u2665";
+      h.style.setProperty("--dx", (Math.random() * 120 - 60) + "px");
+      h.style.animationDelay = i * 70 + "ms";
+      heartBtn.appendChild(h);
+      (function (node) { setTimeout(function () { node.remove(); }, 1900); })(h);
+    }
+  });
+})();
+</script>
+</body>
+</html>
